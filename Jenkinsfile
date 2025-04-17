@@ -63,23 +63,21 @@ pipeline {
             }
         }
 
-        // stage('Test') {
-        //     steps {
-        //         echo "Running tests for ${params.REPO_NAME}"
-
-        //         script {
-        //             if (params.REPO_NAME == 'Front-end') {
-        //                 dir('Front-end') {
-        //                     echo 'Running tests for Frontend'
-        //                 }
-        //             } else if (params.REPO_NAME == 'Devop7303') {
-        //                 dir('Devop7303') {
-        //                     echo 'Running tests for Java springboot Devop7303'
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Test') {
+            steps {
+                script {
+                    if (repoName == 'Front-end') {
+                        dir('Front-end') {
+                            echo 'Running tests for Frontend'
+                        }
+                    } else if (repoName == 'Devop7303') {
+                        dir('Devop7303') {
+                            echo 'Running tests for Java springboot Devop7303'
+                        }
+                    }
+                }
+            }
+        }
 
         // stage('Quality Assurance gate') {
         //     steps {
