@@ -34,6 +34,8 @@ pipeline {
                         dir('Devop7303') {
                             checkout scm
                         }
+                    } else {
+                        echo "Skipping checkout for ${repoName} on branch ${branchName}."
                     }
                 }
             }
