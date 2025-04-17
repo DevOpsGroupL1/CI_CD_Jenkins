@@ -133,11 +133,6 @@ pipeline {
     }
 
     post {
-        
-        always {
-            // echo 'logging out of docker hub'
-            // sh 'docker logout'
-        }
 
         success {
             echo 'Build successful! Archiving new build artifacts.'
