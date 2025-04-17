@@ -34,7 +34,7 @@ pipeline {
                         dir('Devop7303') {
                             checkout scm
                         }
-                    } else {
+                    } else if (repoName == 'CI_CD_Jenkins' && branchName == 'staging') {
                         echo "Skipping checkout for ${repoName} on branch ${branchName}."
                     }
                 }
