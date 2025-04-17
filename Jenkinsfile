@@ -47,7 +47,7 @@ pipeline {
                     if (repoName == 'Iac_Terraform') {
                         dir('Iac_Terraform') {
                             echo 'Installing dependencies for Iac_Terraform'
-                            sh 'terraform init'
+                            // sh 'terraform init'
                         }
                     } else if (repoName == 'Front-end') {
                         dir('Front-end') {
