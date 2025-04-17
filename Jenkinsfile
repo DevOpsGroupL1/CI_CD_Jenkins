@@ -39,31 +39,25 @@ pipeline {
             }
         }
 
-        stage('Provison Terraform') {
+        stage('Install dependencies') {
             steps {
                 script {
                     if (repoName == 'Iac_Terraform') {
                         dir('Iac_Terraform') {
-                            echo 'Provisioning Terraform'
+                            echo 'Installing dependencies for Iac_Terraform'
                             sh 'terraform init'
                         }
+                    } else if (repoName == 'Front-end') {
+                        dir('Front-end') {
+                            echo 'Installing dependencies for Frontend'
+                            sh 'yarn install'
+                        }
+                    } else if (repoName == 'Devop7303') {
+                        dir('Devop7303') {
+                            echo 'Installing dependencies for Java springboot Devop7303'
+                        }
                     }
-                }
-            }
-        }
-
-        stage('Install dependencies') {
-            steps { 
-                if (repoName == 'Front-end') {
-                    dir('Front-end') {
-                        echo 'Installing dependencies for Frontend'
-                        sh 'yarn install'
-                    }
-                } else if (repoName == 'Devop7303') {
-                    dir('Devop7303') {
-                        echo 'Installing dependencies for Java springboot Devop7303'
-                    }
-                }                
+                }              
             }
         }
 
@@ -97,6 +91,18 @@ pipeline {
         //             } else if (params.REPO_NAME == 'Devop7303') {
         //                 dir('Devop7303') {
         //                     echo 'Running SonarQube analysis for Java springboot Devop7303'
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+
+        // stage('Provison Terraform') {
+        //     steps {
+        //         script {
+        //             if (repoName == 'Iac_Terraform') {
+        //                 dir('Iac_Terraform') {
+        //                     echo 'Provisioning Terraform'
         //                 }
         //             }
         //         }
