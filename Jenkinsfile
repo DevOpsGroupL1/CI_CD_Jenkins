@@ -17,24 +17,29 @@ pipeline {
         }
 
         stage('Checkout Repositories') {
+            when {
+                expression {
+                    return branchName == 'staging'
+                }
+            }
             steps {
                 script {
-                    if (repoName == 'Iac_Terraform' && branchName == 'staging') {
+                    if (repoName == 'Iac_Terraform') {
                         echo "Checking out the source code from the repository: ${repoName} - branch: ${branchName}"
                         dir('Iac_Terraform') {
                             checkout scm
                         }
-                    } else if (repoName == 'Front-end' && branchName == 'staging') {
+                    } else if (repoName == 'Front-end') {
                         echo "Checking out the source code from the repository: ${repoName} - branch: ${branchName}"
                         dir('Front-end') {
                             checkout scm
                         }  
-                    } else if (repoName == 'Devop7303' && branchName == 'staging') {
+                    } else if (repoName == 'Devop7303') {
                         echo "Checking out the source code from the repository: ${repoName} - branch: ${branchName}"
                         dir('Devop7303') {
                             checkout scm
                         }
-                    } else if (repoName == 'CI_CD_Jenkins' && branchName == 'staging') {
+                    } else if (repoName == 'CI_CD_Jenkins') {
                         echo "Skipping checkout for ${repoName} on branch ${branchName}."
                     }
                 }
