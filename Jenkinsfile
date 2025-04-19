@@ -40,7 +40,10 @@ pipeline {
                             checkout scm
                         }
                     } else if (repoName == 'CI_CD_Jenkins') {
-                        echo "Skipping checkout for ${repoName} on branch ${branchName}."
+                        echo "Checking out the source code from the repository: ${repoName} - branch: ${branchName}"
+                        dir('CI_CD_Jenkins') {
+                            checkout scm
+                        }
                     }
                 }
             }
