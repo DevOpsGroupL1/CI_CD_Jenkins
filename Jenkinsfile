@@ -17,9 +17,12 @@ pipeline {
         }
 
         stage('Checkout Repositories') {
-            when {
-                expression {
-                    return branchName == 'staging'
+	    when {
+                anyOf {
+                    branch 'PR-*'
+                    expression {
+                                return branchName == 'staging'
+                        }
                 }
             }
             steps {
@@ -47,9 +50,12 @@ pipeline {
         }
 
         stage('Install dependencies') {
-            when {
-                expression {
-                    return branchName == 'staging'
+	    when {
+                anyOf {
+                    branch 'PR-*'
+                    expression {
+                                return branchName == 'staging'
+                        }
                 }
             }
             steps {
@@ -75,12 +81,7 @@ pipeline {
 
         stage('Test') {
             when {
-		anyOf {
-                    branch 'PR-*'
-		    expression {
-                    		return branchName == 'staging'
-                	}
-		}
+                branch 'PR-*'
             }
             steps {
                 script {
