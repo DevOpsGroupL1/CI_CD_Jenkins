@@ -75,7 +75,12 @@ pipeline {
 
         stage('Test') {
             when {
-                branch 'PR-*'
+		anyOf {
+                    branch 'PR-*'
+		    expression {
+                    		return branchName == 'staging'
+                	}
+		}
             }
             steps {
                 script {
