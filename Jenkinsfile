@@ -4,9 +4,6 @@ def branchName = ''
 pipeline {
 
     agent any
-    options {
-	skipDefaultCheckout()
-    }
 
     stages {
 
