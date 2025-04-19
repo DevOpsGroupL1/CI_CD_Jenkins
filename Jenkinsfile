@@ -40,16 +40,18 @@ pipeline {
                             checkout scm
                         }
                     } else if (repoName == 'CI_CD_Jenkins') {
-                        echo "Checking out the source code from the repository: ${repoName} - branch: ${branchName}"
-                        dir('CI_CD_Jenkins') {
-                            checkout scm
-                        }
+                        echo "Skipping checkout for ${repoName} on branch ${branchName}."
                     }
                 }
             }
         }
 
         stage('Install dependencies') {
+            when {
+                expression {
+                    return branchName == 'staging'
+                }
+            }
             steps {
                 script {
                     if (repoName == 'Iac_Terraform') {
@@ -72,16 +74,25 @@ pipeline {
         }
 
         stage('Test') {
+            when {
+                branch 'PR-*'
+            }
             steps {
                 script {
                     if (repoName == 'Front-end') {
                         dir('Front-end') {
-                            echo 'Running tests for Frontend'
+                            echo 'Running tests for ${repoName} repository.'
                         }
                     } else if (repoName == 'Devop7303') {
                         dir('Devop7303') {
-                            echo 'Running tests for Java springboot Devop7303'
+                            echo 'Running tests for ${repoName} repository.'
                         }
+                    } else if (repoName == 'Iac_Terraform') {
+			dir('Iac_Terraform') {
+			    echo 'Running test for ${repoName} repository.'
+			}
+		    } else if (repoName == 'CI_CD_Jenkins') {
+                        echo "Skipping test for ${repoName} repository."
                     }
                 }
             }
