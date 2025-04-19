@@ -77,6 +77,9 @@ pipeline {
             when {
 		anyOf {
                     branch 'PR-*'
+		    expression {
+                    		return branchName == 'staging'
+                	}
 		}
             }
             steps {
